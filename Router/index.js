@@ -1,12 +1,17 @@
 const express=require('express');
 const router=express.Router()
 
-const UserController=require("../Controller/User.controller")
-const ProductsController=require("../Controller/Products.controller")
+const userController=require("../Controller/User.controller")
+const productController=require("../Controller/Products.controller")
 
-//products
+//users routes
+router.post('/users/signin',userController.signinUser)
+router.post('/users/signup',userController.signupUser)
+router.post('/users/password',userController.changePassword)
 
-router.get("/products",ProductsController.getAllProducts)
+//products routes
+
+router.get("/products",productController.getAllProducts)
 
 
 module.exports=router;

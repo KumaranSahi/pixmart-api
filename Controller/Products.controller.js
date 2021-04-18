@@ -1,4 +1,4 @@
-const productsdb=require("../Model/Products.model");
+const productsdb=require("../Models/products.model");
 
 module.exports.getAllProducts=async (req,res)=>{
     try{

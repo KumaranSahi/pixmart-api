@@ -3,9 +3,13 @@ const PORT=8000;
 
 const router=require('./Router')
 const db=require('./Config/Mongoose')
+const cors=require('cors')
+const passport=require('./Config/Passport')
 
 const app=express()
 
+app.use(cors())
+app.use(express.json())
 app.use("/api",router);
 
 app.use("/",(req,res)=>{
