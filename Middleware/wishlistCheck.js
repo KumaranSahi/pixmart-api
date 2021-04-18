@@ -1,13 +1,9 @@
-const productsdb=require('../Models/products.model');
+const wishlistsdb=require('../Models/wishlists.model');
 
-const productCheck=async (req,res,next)=>{
-    let productId
-    if(req.params.productId)
-        productId=req.params.productId
-    else
-        productId=req.body.productId
+const wishlistCheck=async (req,res,next)=>{
+    const {wishlistid}=req.params
     try{
-        if(await productsdb.findById(productId)){
+        if(await wishlistsdb.findById(wishlistid)){
             next()
         }else{
             return res.status(404).json({
@@ -24,4 +20,4 @@ const productCheck=async (req,res,next)=>{
     }
 }
 
-module.exports=productCheck;
+module.exports=wishlistCheck;
