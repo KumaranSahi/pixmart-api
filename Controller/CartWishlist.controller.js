@@ -2,7 +2,6 @@ const usersdb=require('../Models/users.model');
 const cartsdb=require('../Models/carts.model');
 const wishlistsdb=require('../Models/wishlists.model');
 const productsdb=require('../Models/products.model');
-const intrestedItemsdb=require('../Models/intrestedItems.model');
 
 module.exports.addToCart=async (req,res)=>{
     const {id}=req.params;
@@ -34,6 +33,32 @@ module.exports.addToCart=async (req,res)=>{
         return res.status(201).json({
             ok:true,
             message:"Product added to cart"
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(503).json({
+            ok:false,
+            message:"Internal error"
+        })
+    }
+}
+
+module.exports.removeFromCart=async (req,res)=>{
+    const {cartid}=req.params
+    const {productId}=req.body;
+    try{
+        const cart=await cartsdb.findById(cartid);
+        if(cart.cartItems.some(({product})=>product==productId)){
+            await cart.update({$pull:{cartItems:{product:productId}}})
+        }else{
+            return res.status(400).json({
+                ok:false,
+                messafe:"Invalid request"
+            })
+        }
+        return res.status(201).json({
+            ok:true,
+            message:"Product removed from cart"
         })
     }catch(error){
         console.log(error);
