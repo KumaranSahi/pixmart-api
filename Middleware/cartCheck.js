@@ -5,6 +5,11 @@ const cartCheck=async (req,res,next)=>{
     try{
         if(await cartsdb.findById(cartid)){
             next()
+        }else{
+            return res.status(404).json({
+                ok:false,
+                message:"Data not found"
+            })
         }
     }catch(error){
         console.log(error);

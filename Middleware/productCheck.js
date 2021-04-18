@@ -5,6 +5,11 @@ const productCheck=async (req,res,next)=>{
     try{
         if(await productsdb.findById(productId)){
             next()
+        }else{
+            return res.status(404).json({
+                ok:false,
+                message:"Data not found"
+            })
         }
     }catch(error){
         console.log(error);
