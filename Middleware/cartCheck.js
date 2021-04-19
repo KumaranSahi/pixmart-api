@@ -1,9 +1,9 @@
 const cartsdb=require('../Models/carts.model');
 
 const cartCheck=async (req,res,next)=>{
-    const {cartid}=req.params
+    const {cartId}=req.params
     try{
-        if(await cartsdb.findById(cartid)){
+        if(await cartsdb.findById(cartId)){
             next()
         }else{
             return res.status(404).json({

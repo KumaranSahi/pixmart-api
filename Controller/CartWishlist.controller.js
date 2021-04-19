@@ -44,9 +44,9 @@ module.exports.addToCart=async (req,res)=>{
 }
 
 module.exports.removeFromCart=async (req,res)=>{
-    const {cartid,productId}=req.params
+    const {cartId,productId}=req.params
     try{
-        const cart=await cartsdb.findById(cartid);
+        const cart=await cartsdb.findById(cartId);
         if(cart.cartItems.some(({product})=>product==productId)){
             await cart.update({$pull:{cartItems:{product:productId}}})
         }else{
@@ -59,6 +59,39 @@ module.exports.removeFromCart=async (req,res)=>{
             ok:true,
             message:"Product removed from cart"
         })
+    }catch(error){
+        console.log(error);
+        return res.status(503).json({
+            ok:false,
+            message:"Internal error"
+        })
+    }
+}
+
+module.exports.changeQuantity=async (req,res)=>{
+    const {cartId,productId}=req.params;
+    const {quantity}=req.body
+    try{
+        const cart=await cartsdb.findById(cartId);
+        if(cart.cartItems.some(({product})=>product==productId)&& quantity>0){
+                await cart.updateOne({$pull:{cartItems:{product:productId}}});
+                await cart.cartItems.push({
+                    product:productId,
+                    quantity:quantity
+                })
+                await cart.save();
+                const data=await (await cartsdb.findById(cartId)).execPopulate({path:'cartItems',populate:({path:'product'})})
+                return res.status(201).json({
+                ok:true,
+                data:data,
+                message:"Product quantity updated"
+            })
+        }else{
+            return res.status(400).json({
+                ok:false,
+                messafe:"Invalid request"
+            })
+        }
     }catch(error){
         console.log(error);
         return res.status(503).json({

@@ -24,7 +24,8 @@ router.get("/products",productController.getAllProducts)
 //cart routes
 
 router.post("/carts/:id",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.addToCart)
-router.delete("/carts/:cartid/products/:productId",passport.authenticate('jwt',{session:false}),cartCheck,productCheck,cartWishlistController.removeFromCart)
+router.delete("/carts/:cartId/products/:productId",passport.authenticate('jwt',{session:false}),cartCheck,productCheck,cartWishlistController.removeFromCart)
+router.put("/carts/:cartId/products/:productId",passport.authenticate('jwt',{session:false}),cartCheck,productCheck,cartWishlistController.changeQuantity)
 
 //wishlist routes
 
