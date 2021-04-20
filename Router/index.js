@@ -20,16 +20,18 @@ router.post('/users/password',userController.changePassword)
 //products routes
 
 router.get("/products",productController.getAllProducts)
+router.get("/products/:productId",productCheck,productController.getProduct)
 
 //cart routes
 
 router.post("/carts/:id",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.addToCart)
-router.delete("/carts/:cartId/products/:productId",passport.authenticate('jwt',{session:false}),cartCheck,productCheck,cartWishlistController.removeFromCart)
-router.put("/carts/:cartId/products/:productId",passport.authenticate('jwt',{session:false}),cartCheck,productCheck,cartWishlistController.changeQuantity)
+router.delete("/carts/:id/products/:productId",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.removeFromCart)
+router.put("/carts/:id/products/:productId",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.changeQuantity)
+router.get("/carts/:id",passport.authenticate('jwt',{session:false}),userCheck,cartWishlistController.getAllCartItems)
 
 //wishlist routes
 
 router.post("/wishlists/:id",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.addToWishlist)
-router.delete("/wishlists/:wishlistid/products/:productId",passport.authenticate('jwt',{session:false}),wishlistCheck,productCheck,cartWishlistController.removeFromWishlist)
+router.delete("/wishlists/:id/products/:productId",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.removeFromWishlist)
 
 module.exports=router;
