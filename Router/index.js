@@ -33,5 +33,6 @@ router.get("/carts/:id",passport.authenticate('jwt',{session:false}),userCheck,c
 
 router.post("/wishlists/:id",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.addToWishlist)
 router.delete("/wishlists/:id/products/:productId",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.removeFromWishlist)
+router.get("/wishlists/:id",passport.authenticate('jwt',{session:false}),userCheck,cartWishlistController.getAllwishlistItems)
 
 module.exports=router;

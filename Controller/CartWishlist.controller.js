@@ -157,8 +157,12 @@ module.exports.addToWishlist=async (req,res)=>{
             await newWishlist.wishlistItems.push(productId)
             newWishlist.save();
         }
+        const newUser=await usersdb.findById(id)
+        const data=await (await wishlistsdb.findById(newUser.wishlist)).execPopulate({path:'wishlistItems',populate:({path:'product'})})
+        
         return res.status(201).json({
             ok:true,
+            data:[...data.wishlistItems],
             message:"Product added to wishlist"
         })
     }catch(error){
@@ -183,9 +187,33 @@ module.exports.removeFromWishlist=async (req,res)=>{
                 messafe:"Invalid request"
             })
         }
+        const newUser=await usersdb.findById(id)
+        const data=await (await wishlistsdb.findById(newUser.wishlist)).execPopulate({path:'wishlistItems',populate:({path:'product'})})
+        
         return res.status(201).json({
             ok:true,
+            data:[...data.wishlistItems],
             message:"Product removed from wishlist"
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(503).json({
+            ok:false,
+            message:"Internal error"
+        })
+    }
+}
+
+module.exports.getAllwishlistItems=async (req,res)=>{
+    const {id}=req.params
+    try{
+        const user=await usersdb.findById(id)
+        const data=await (await wishlistsdb.findById(user.wishlist)).execPopulate({path:'wishlistItems',populate:({path:'product'})})
+        
+        return res.status(201).json({
+            ok:true,
+            data:[...data.wishlistItems],
+            message:"Product added to wishlist"
         })
     }catch(error){
         console.log(error);
