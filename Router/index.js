@@ -5,6 +5,7 @@ const passport=require('passport')
 const userController=require("../Controller/User.controller")
 const productController=require("../Controller/Products.controller")
 const cartWishlistController=require("../Controller/CartWishlist.controller")
+const checkoutController=require('../Controller/Checkout.controller')
 
 //middleware
 const userCheck=require("../Middleware/userCheck")
@@ -34,5 +35,11 @@ router.get("/carts/:id",passport.authenticate('jwt',{session:false}),userCheck,c
 router.post("/wishlists/:id",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.addToWishlist)
 router.delete("/wishlists/:id/products/:productId",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.removeFromWishlist)
 router.get("/wishlists/:id",passport.authenticate('jwt',{session:false}),userCheck,cartWishlistController.getAllwishlistItems)
+
+//checkout routes
+
+router.get("/addresses/:id",passport.authenticate('jwt',{session:false}),userCheck,checkoutController.getAllAddresses);
+router.post("/addresses/:id",passport.authenticate('jwt',{session:false}),userCheck,checkoutController.addAddress)
+router.delete("/addresses/:addressId/users/:id",passport.authenticate('jwt',{session:false}),userCheck,checkoutController.deleteAddress)
 
 module.exports=router;

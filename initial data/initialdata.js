@@ -140,11 +140,6 @@ module.exports.initialData=[
       price:8000,
       catagory:"ACCESSORIES"
     },{
-      name:"Digitek monopod",
-      image:"https://res.cloudinary.com/docpuxue8/image/upload/v1616867827/Pixmart/Product%20Images/ACCESSORIES/Digitek_monopod_fdfhap.jpg",
-      price:38000,
-      catagory:"ACCESSORIES"
-    },{
       name:"Canon 28-75mm Macro lens",
       image:"https://res.cloudinary.com/docpuxue8/image/upload/v1616867907/Pixmart/Product%20Images/ACCESSORIES/Canon_28-75mm_Macro_neqj4f.jpg",
       price:35000,

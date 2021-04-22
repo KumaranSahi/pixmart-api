@@ -15,7 +15,7 @@ module.exports.addToCart=async (req,res)=>{
                     product:productId,
                     quantity:1
                 })
-                cart.save();
+                await cart.save();
             }
         }else{
             const newCart=await cartsdb.create({
@@ -28,7 +28,7 @@ module.exports.addToCart=async (req,res)=>{
                 product:productId,
                 quantity:1
             })
-            newCart.save();
+            await newCart.save();
         }
         const newUser=await usersdb.findById(id)
         const data=await (await cartsdb.findById(newUser.cart)).execPopulate({path:'cartItems',populate:({path:'product'})})
@@ -145,7 +145,7 @@ module.exports.addToWishlist=async (req,res)=>{
         if(wishlist){
             if(!wishlist.wishlistItems.some(product=>product==productId)){
                 wishlist.wishlistItems.push(productId)
-                wishlist.save();
+                await wishlist.save();
             }
         }else{
             const newWishlist=await wishlistsdb.create({
@@ -155,7 +155,7 @@ module.exports.addToWishlist=async (req,res)=>{
                 wishlist:newWishlist._id
             })
             await newWishlist.wishlistItems.push(productId)
-            newWishlist.save();
+            await newWishlist.save();
         }
         const newUser=await usersdb.findById(id)
         const data=await (await wishlistsdb.findById(newUser.wishlist)).execPopulate({path:'wishlistItems',populate:({path:'product'})})
