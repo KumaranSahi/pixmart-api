@@ -20,6 +20,9 @@ const UserSchema=new mongoose.Schema({
     },address:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'address'
+    },payment:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'payment'
     }
 })
 

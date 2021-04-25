@@ -36,10 +36,16 @@ router.post("/wishlists/:id",passport.authenticate('jwt',{session:false}),userCh
 router.delete("/wishlists/:id/products/:productId",passport.authenticate('jwt',{session:false}),userCheck,productCheck,cartWishlistController.removeFromWishlist)
 router.get("/wishlists/:id",passport.authenticate('jwt',{session:false}),userCheck,cartWishlistController.getAllwishlistItems)
 
-//checkout routes
+//address routes
 
 router.get("/addresses/:id",passport.authenticate('jwt',{session:false}),userCheck,checkoutController.getAllAddresses);
 router.post("/addresses/:id",passport.authenticate('jwt',{session:false}),userCheck,checkoutController.addAddress)
 router.delete("/addresses/:addressId/users/:id",passport.authenticate('jwt',{session:false}),userCheck,checkoutController.deleteAddress)
+
+//payment details routes
+
+router.get('/payments/:id',passport.authenticate('jwt',{session:false}),userCheck,checkoutController.getAllPaymentDetails);
+router.post('/payments/:id',passport.authenticate('jwt',{session:false}),userCheck,checkoutController.addPaymentDetail)
+router.delete("/payments/:paymentId/users/:id",passport.authenticate('jwt',{session:false}),userCheck,checkoutController.deletePaymentDetails)
 
 module.exports=router;
