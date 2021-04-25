@@ -48,4 +48,8 @@ router.get('/payments/:id',passport.authenticate('jwt',{session:false}),userChec
 router.post('/payments/:id',passport.authenticate('jwt',{session:false}),userCheck,checkoutController.addPaymentDetail)
 router.delete("/payments/:paymentId/users/:id",passport.authenticate('jwt',{session:false}),userCheck,checkoutController.deletePaymentDetails)
 
+//checkout routes
+
+router.post('/orders/:id',passport.authenticate('jwt',{session:false}),userCheck,checkoutController.addNewOrder);
+
 module.exports=router;

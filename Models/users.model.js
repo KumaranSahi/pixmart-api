@@ -23,6 +23,9 @@ const UserSchema=new mongoose.Schema({
     },payment:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'payment'
+    },order:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'order'
     }
 })
 

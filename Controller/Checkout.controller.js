@@ -1,6 +1,8 @@
 const addressesdb=require('../Models/addresses.model');
 const usersdb=require('../Models/users.model');
 const paymentsdb=require('../Models/payments.model')
+const ordersdb=require('../Models/orders.model')
+const cartsdb=require('../Models/carts.model')
 
 module.exports.getAllAddresses=async (req,res)=>{
     const {id}=req.params;
@@ -182,6 +184,36 @@ module.exports.deletePaymentDetails=async (req,res)=>{
             ok:true,
             data:[...newPayment.payments],
             message:"Payment details deleted"
+        })
+    }catch(error){
+        console.log(error)
+        return res.status(503).json({
+            ok:false,
+            message:"Internal server error"
+        })
+    }
+}
+
+module.exports.addNewOrder=async (req,res)=>{
+    const {id}=req.params;
+    const {products,totalCost}=req.body;
+    try{
+        const user=await usersdb.findById(id);
+        const order=await ordersdb.findById(user.order)
+        if(order){
+            await order.updateOne({orders:[...order.orders,{products:products,totalCost:totalCost}]})
+        }else{
+            const newOrder=await ordersdb.create({
+                by:id
+            })
+            await user.updateOne({order:newOrder._id})
+            await newOrder.updateOne({orders:[{products:products,totalCost:totalCost}]})
+        }
+        const cart=await cartsdb.findById(user.cart);
+        await cart.updateOne({cartItems:[]});
+        return res.status(201).json({
+            ok:true,
+            message:"Order placed successfully"
         })
     }catch(error){
         console.log(error)
