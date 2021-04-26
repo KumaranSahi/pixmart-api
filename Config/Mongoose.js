@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/pixweb', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env["DB_URI"], {useNewUrlParser: true, useUnifiedTopology: true});
 const db=mongoose.connection;
 
 db.on('error', console.error.bind("Something went wrong with the Mongodb Server"));
