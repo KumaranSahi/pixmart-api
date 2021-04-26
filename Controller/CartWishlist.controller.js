@@ -208,13 +208,21 @@ module.exports.getAllwishlistItems=async (req,res)=>{
     const {id}=req.params
     try{
         const user=await usersdb.findById(id)
-        const data=await (await wishlistsdb.findById(user.wishlist)).execPopulate({path:'wishlistItems',populate:({path:'product'})})
-        
-        return res.status(201).json({
-            ok:true,
-            data:[...data.wishlistItems],
-            message:"Product added to wishlist"
-        })
+        const wishlist=await wishlistsdb.findById(user.wishlist)
+        if(wishlist){
+            const data=await (await wishlistsdb.findById(user.wishlist)).execPopulate({path:'wishlistItems',populate:({path:'product'})})
+            return res.status(201).json({
+                ok:true,
+                data:[...data.wishlistItems],
+                message:"Product added to wishlist"
+            })
+        }else{
+            return res.status(200).json({
+                ok:true,
+                data:[],
+                message:"Wishlist hasn't been created yet"
+            })
+        }
     }catch(error){
         console.log(error);
         return res.status(503).json({
