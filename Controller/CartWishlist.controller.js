@@ -5,7 +5,7 @@ const productsdb=require('../Models/products.model');
 
 module.exports.addToCart=async (req,res)=>{
     const {id}=req.params;
-    const {productId}=req.body;
+    const {productId,quantity}=req.body;
     try{
         const user=await usersdb.findById(id);
         const cart=await cartsdb.findById(user.cart);
@@ -13,7 +13,7 @@ module.exports.addToCart=async (req,res)=>{
             if(!cart.cartItems.some(({product})=>product==productId)){
                 cart.cartItems.push({
                     product:productId,
-                    quantity:1
+                    quantity:quantity
                 })
                 await cart.save();
             }
@@ -26,7 +26,7 @@ module.exports.addToCart=async (req,res)=>{
             })
             await newCart.cartItems.push({
                 product:productId,
-                quantity:1
+                quantity:quantity
             })
             await newCart.save();
         }
@@ -56,7 +56,7 @@ module.exports.removeFromCart=async (req,res)=>{
         }else{
             return res.status(400).json({
                 ok:false,
-                messafe:"Invalid request"
+                message:"Invalid request"
             })
         }
         const data=await (await cartsdb.findById(user.cart)).execPopulate({path:'cartItems',populate:({path:'product'})})
@@ -96,7 +96,7 @@ module.exports.changeQuantity=async (req,res)=>{
         }else{
             return res.status(400).json({
                 ok:false,
-                messafe:"Invalid request"
+                message:"Invalid request"
             })
         }
     }catch(error){
@@ -184,7 +184,7 @@ module.exports.removeFromWishlist=async (req,res)=>{
         }else{
             return res.status(400).json({
                 ok:false,
-                messafe:"Invalid request"
+                message:"Invalid request"
             })
         }
         const newUser=await usersdb.findById(id)
