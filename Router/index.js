@@ -23,25 +23,25 @@ router.get("/products/:productId", productCheck, productController.getProduct);
 //cart routes
 
 router.post(
-  "/carts/:id",
+  "/carts",
   passport.authenticate("jwt", { session: false }),
   productCheck,
   cartWishlistController.addToCart
 );
 router.delete(
-  "/carts/:id/products/:productId",
+  "/carts/:productId",
   passport.authenticate("jwt", { session: false }),
   productCheck,
   cartWishlistController.removeFromCart
 );
 router.put(
-  "/carts/:id/products/:productId",
+  "/carts/:productId",
   passport.authenticate("jwt", { session: false }),
   productCheck,
   cartWishlistController.changeQuantity
 );
 router.get(
-  "/carts/:id",
+  "/carts",
   passport.authenticate("jwt", { session: false }),
   cartWishlistController.getAllCartItems
 );
@@ -49,19 +49,19 @@ router.get(
 //wishlist routes
 
 router.post(
-  "/wishlists/:id",
+  "/wishlists",
   passport.authenticate("jwt", { session: false }),
   productCheck,
   cartWishlistController.addToWishlist
 );
 router.delete(
-  "/wishlists/:id/products/:productId",
+  "/wishlists/:productId",
   passport.authenticate("jwt", { session: false }),
   productCheck,
   cartWishlistController.removeFromWishlist
 );
 router.get(
-  "/wishlists/:id",
+  "/wishlists",
   passport.authenticate("jwt", { session: false }),
   cartWishlistController.getAllwishlistItems
 );
