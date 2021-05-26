@@ -3,13 +3,13 @@ const mongoose=require('mongoose');
 const wishlistSchema=new mongoose.Schema({
     wishlistItems:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"product"
+        ref:"Product"
     }],
     by:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"user"
+        ref:"User"
     }
 },{timestamps:true})
 
-const wishlist=mongoose.model("wishlist",wishlistSchema)
-module.exports=wishlist;
+const Wishlist=mongoose.model("Wishlist",wishlistSchema)
+module.exports=Wishlist;
