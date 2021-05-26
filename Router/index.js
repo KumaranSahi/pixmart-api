@@ -69,17 +69,17 @@ router.get(
 //address routes
 
 router.get(
-  "/addresses/:id",
+  "/addresses",
   passport.authenticate("jwt", { session: false }),
   checkoutController.getAllAddresses
 );
 router.post(
-  "/addresses/:id",
+  "/addresses",
   passport.authenticate("jwt", { session: false }),
   checkoutController.addAddress
 );
 router.delete(
-  "/addresses/:addressId/users/:id",
+  "/addresses/:addressId",
   passport.authenticate("jwt", { session: false }),
   checkoutController.deleteAddress
 );
@@ -87,17 +87,17 @@ router.delete(
 //payment details routes
 
 router.get(
-  "/payments/:id",
+  "/payments",
   passport.authenticate("jwt", { session: false }),
   checkoutController.getAllPaymentDetails
 );
 router.post(
-  "/payments/:id",
+  "/payments",
   passport.authenticate("jwt", { session: false }),
   checkoutController.addPaymentDetail
 );
 router.delete(
-  "/payments/:paymentId/users/:id",
+  "/payments/:paymentId",
   passport.authenticate("jwt", { session: false }),
   checkoutController.deletePaymentDetails
 );
@@ -105,7 +105,7 @@ router.delete(
 //checkout routes
 
 router.post(
-  "/orders/:id",
+  "/orders",
   passport.authenticate("jwt", { session: false }),
   checkoutController.addNewOrder
 );
