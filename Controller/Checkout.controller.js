@@ -146,7 +146,7 @@ module.exports.addPaymentDetail = async (req, res) => {
 };
 
 module.exports.getAllPaymentDetails = async (req, res) => {
-  const user=req.user;
+  const user = req.user;
   try {
     const data = await Payment.findById(user.payment);
     if (data) {
@@ -173,7 +173,7 @@ module.exports.getAllPaymentDetails = async (req, res) => {
 
 module.exports.deletePaymentDetails = async (req, res) => {
   const { paymentId } = req.params;
-  const user=req.user;
+  const user = req.user;
   try {
     const payment = await Payment.findById(user.payment);
     await payment.updateOne({
@@ -195,7 +195,7 @@ module.exports.deletePaymentDetails = async (req, res) => {
 };
 
 module.exports.addNewOrder = async (req, res) => {
-  const user=req.user;
+  const user = req.user;
   const { products, totalCost } = req.body;
   try {
     const order = await Order.findById(user.order);
