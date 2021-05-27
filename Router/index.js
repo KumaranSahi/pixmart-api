@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
+const productController = require("../Controller/product.controller");
 const userController = require("../Controller/user.controller");
-const productController = require("../Controller/products.controller");
 const cartWishlistController = require("../Controller/cartWishlist.controller");
 const checkoutController = require("../Controller/checkout.controller");
 
