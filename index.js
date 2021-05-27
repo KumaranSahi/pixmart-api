@@ -2,9 +2,9 @@ const express = require("express");
 const PORT = 8000;
 
 const router = require("./Router");
-const db = require("./Config/Mongoose");
+const db = require("./Config/mongoose");
 const cors = require("cors");
-const passport = require("./Config/Passport");
+const passport = require("./Config/passport");
 
 const app = express();
 
