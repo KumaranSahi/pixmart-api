@@ -60,7 +60,7 @@ module.exports.addAddress = async (req, res) => {
       });
       newAddress.save();
     }
-    const newUser = await User.findById(id);
+    const newUser = await User.findById(user._id);
     const data = await Address.findById(newUser.address);
     return res.status(201).json({
       ok: true,
