@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
-const userController = require("../Controller/User.controller");
-const productController = require("../Controller/Products.controller");
-const cartWishlistController = require("../Controller/CartWishlist.controller");
-const checkoutController = require("../Controller/Checkout.controller");
+const userController = require("../Controller/user.controller");
+const productController = require("../Controller/products.controller");
+const cartWishlistController = require("../Controller/cartWishlist.controller");
+const checkoutController = require("../Controller/checkout.controller");
 
 //middleware
 const productCheck = require("../Middleware/product.middleware");
