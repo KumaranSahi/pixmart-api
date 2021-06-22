@@ -1,8 +1,8 @@
-const Address = require("../Models/addresses.model");
-const User = require("../Models/users.model");
-const Payment = require("../Models/payments.model");
-const Order = require("../Models/orders.model");
-const Cart = require("../Models/carts.model");
+const Address = require("../models/addresses.model");
+const User = require("../models/users.model");
+const Payment = require("../models/payments.model");
+const Order = require("../models/orders.model");
+const Cart = require("../models/carts.model");
 
 module.exports.getAllAddresses = async (req, res) => {
   const user = req.user;

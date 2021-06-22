@@ -1,6 +1,6 @@
-const User = require("../Models/users.model");
-const Cart = require("../Models/carts.model");
-const Wishlist = require("../Models/wishlists.model");
+const User = require("../models/users.model");
+const Cart = require("../models/carts.model");
+const Wishlist = require("../models/wishlists.model");
 
 module.exports.addToCart = async (req, res) => {
   const user = req.user;
