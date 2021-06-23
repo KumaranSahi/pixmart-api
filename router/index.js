@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
-const productController = require("../controller/product.controller");
-const userController = require("../controller/user.controller");
-const cartWishlistController = require("../controller/cartWishlist.controller");
-const checkoutController = require("../controller/checkout.controller");
+const {
+  productController,
+  cartWishlistController,
+  checkoutController,
+  userController,
+} = require("../controller");
 
 //middleware
 const productCheck = require("../middleware/product.middleware");
