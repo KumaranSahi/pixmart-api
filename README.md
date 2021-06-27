@@ -9,4 +9,8 @@ Built with:
 - Mongoose
 - PassportJS
 
-API Link: https://pixmart-api.herokuapp.com/
+> Live Link : https://pixmart.netlify.app/
+ 
+> API Link : https://pixmart-api.herokuapp.com/
+
+> Frontend repo : https://github.com/KumaranSahi/pixmart-review
