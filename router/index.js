@@ -16,6 +16,7 @@ const productCheck = require("../middleware/product.middleware");
 router.post("/users/signin", userController.signinUser);
 router.post("/users/signup", userController.signupUser);
 router.post("/users/password", userController.changePassword);
+router.get("/users/guest-signin", userController.signinGuest);
 
 //products routes
 
